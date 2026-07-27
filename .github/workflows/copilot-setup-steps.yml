@@ -1,0 +1,126 @@
+name: Copilot Setup Steps
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  copilot-setup:
+    name: Prepare Workshop Repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Welcome
+        run: |
+          echo "======================================="
+          echo " GitHub Copilot Workshop Repository"
+          echo "======================================="
+          echo ""
+          echo "Repository successfully checked out."
+          echo ""
+
+      - name: Verify Repository Structure
+        run: |
+          echo "Checking repository structure..."
+
+          REQUIRED_DIRS=(
+            ".github"
+            ".github/agents"
+            ".github/instructions"
+            ".github/skills"
+            "app"
+            "components"
+            "public"
+          )
+
+          for dir in "${REQUIRED_DIRS[@]}"; do
+            if [ -d "$dir" ]; then
+              echo "✅ $dir"
+            else
+              echo "❌ Missing directory: $dir"
+              exit 1
+            fi
+          done
+
+      - name: Verify Instruction Files
+        run: |
+          echo "Checking Copilot instructions..."
+
+          REQUIRED_FILES=(
+            ".github/copilot-instructions.md"
+            ".github/instructions/business-analyst.instructions.md"
+            ".github/instructions/frontend.instructions.md"
+            ".github/instructions/python.instructions.md"
+            ".github/instructions/report.instructions.md"
+          )
+
+          for file in "${REQUIRED_FILES[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ Missing file: $file"
+              exit 1
+            fi
+          done
+
+      - name: Verify Skills
+        run: |
+          echo "Checking Skills..."
+
+          REQUIRED_SKILLS=(
+            ".github/skills/clean-business-data/skill.md"
+            ".github/skills/executive-analysis/skill.md"
+            ".github/skills/dashboard-review/skill.md"
+            ".github/skills/executive-report/skill.md"
+            ".github/skills/presentation-generator/skill.md"
+          )
+
+          for file in "${REQUIRED_SKILLS[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ Missing Skill: $file"
+              exit 1
+            fi
+          done
+
+      - name: Verify Agents
+        run: |
+          echo "Checking Agents..."
+
+          REQUIRED_AGENTS=(
+            ".github/agents/executive-advisor.md"
+            ".github/agents/financial-analyst.md"
+            ".github/agents/marketing-strategist.md"
+            ".github/agents/operations-consultant.md"
+            ".github/agents/dashboard-designer.md"
+            ".github/agents/frontend-engineer.md"
+          )
+
+          for file in "${REQUIRED_AGENTS[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ $file"
+            else
+              echo "❌ Missing Agent: $file"
+              exit 1
+            fi
+          done
+
+      - name: Repository Summary
+        run: |
+          echo ""
+          echo "---------------------------------------"
+          echo "Repository Validation Complete"
+          echo "---------------------------------------"
+          echo ""
+          echo "GitHub Copilot Instructions: ✓"
+          echo "Custom Instructions:          ✓"
+          echo "Skills:                       ✓"
+          echo "Agents:                       ✓"
+          echo ""
+          echo "Workshop repository is ready."
