@@ -237,11 +237,12 @@ If you discover a better prompt, workflow or business analysis technique, feel f
 
 ---
 
-# 📜 License
+# 📜 Credits
 
-This repository is provided for educational purposes.
+This repository is designed for non-technical students, particularly MBA students, who want to build practical technology skills without requiring a strong programming background.
 
-Please refer to the repository license for details.
+The workshop content is heavily inspired by the GitHub Developer Relations (DevRel) **Tailspin Toys Workshop**, available at: https://github.com/GeekTrainer/tailspin-toys-workshop. This repository adapts those concepts into a format that is more accessible and relevant for non-technical learners.
+
 
 ---
 
